@@ -1,0 +1,42 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/prepare_dataset.py
+    deps:
+    - path: data/raw/изменение_статуса.xlsx
+      hash: md5
+      md5: c784099ccd58d0c1047d90e0eb0ab58e
+      size: 7981243
+    - path: data/raw/результаты.xlsx
+      hash: md5
+      md5: 896627bc54d1400ef229b8a5f5db9b48
+      size: 134146793
+    - path: src/prepare_dataset.py
+      hash: md5
+      md5: b848aa006d43d1d462f2a8a14e402938
+      size: 4207
+    outs:
+    - path: data/processed/dataset.csv
+      hash: md5
+      md5: 43e21e6d10676cf7f70f5379875ced70
+      size: 58868
+  train:
+    cmd: python src/train_model.py
+    deps:
+    - path: data/processed/dataset.csv
+      hash: md5
+      md5: 43e21e6d10676cf7f70f5379875ced70
+      size: 58868
+    - path: src/train_model.py
+      hash: md5
+      md5: 374fd58ed78ff91573d82ad0234f41dd
+      size: 1978
+    outs:
+    - path: metrics/metrics.json
+      hash: md5
+      md5: ff7a85ea6937ba308188c6d285f60a94
+      size: 1086
+    - path: models/model.joblib
+      hash: md5
+      md5: be4b29192eba0e4943d68a11a3aa0d0b
+      size: 4109265
