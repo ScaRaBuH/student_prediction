@@ -1,0 +1,21 @@
+stages:
+  prepare:
+    cmd: python src/prepare_dataset.py
+    deps:
+    - data/raw/изменение_статуса.xlsx
+    - data/raw/результаты.xlsx
+    - src/prepare_dataset.py
+    outs:
+    - data/processed/dataset.csv:
+        cache: false
+  train:
+    cmd: python src/train_model.py
+    deps:
+    - data/processed/dataset.csv
+    - src/train_model.py
+    outs:
+    - models/model.joblib:
+        cache: false
+    metrics:
+    - metrics/metrics.json:
+        cache: false
