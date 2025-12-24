@@ -9,8 +9,6 @@ RAW_DIR = "data/raw"
 results_path = os.path.join(RAW_DIR, "результаты.xlsx")
 status_path = os.path.join(RAW_DIR, "изменение_статуса.xlsx")
 
-print("Загружаем данные...")
-
 # Читаем оба файла
 df_results = pd.read_excel(results_path)
 df_status = pd.read_excel(status_path)
