@@ -5,8 +5,6 @@ RESULTS_PATH = "data/raw/результаты.xlsx"
 STATUS_PATH = "data/raw/изменение_статуса.xlsx"
 OUTPUT_PATH = "data/processed/dataset.csv"
 
-print("Загружаем данные...")
-
 df_results = pd.read_excel(RESULTS_PATH)
 df_status = pd.read_excel(STATUS_PATH)
 
@@ -24,6 +22,10 @@ final_status = df_status_sorted.groupby("PK").last()[["статус", "выпу�
 print("\nРаспределение финальных статусов (до маппинга):")
 print(final_status["статус"].value_counts())
 
+<<<<<<< HEAD
+=======
+# Создание целевой переменной
+>>>>>>> 6d39fc206fcfa0263d43f21cd727c110ecd1d30b
 def map_target(row):
     if row["выпуск"] == "выпустился":
         return "graduated"
@@ -41,7 +43,7 @@ final_status["target"] = final_status.apply(map_target, axis=1)
 print("\nРаспределение целевой переменной:")
 print(final_status["target"].value_counts())
 
-# Теперь выделяем первый семестр
+# Выделяем первый семестр
 # Для каждого студента берём минимальный SEMESTER
 student_first_semester = df_results.groupby("PK")["SEMESTER"].min().reset_index()
 student_first_semester = student_first_semester.rename(columns={"SEMESTER": "first_semester"})

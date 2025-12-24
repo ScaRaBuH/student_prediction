@@ -106,4 +106,8 @@ metrics = {
 with open(METRICS_PATH, "w", encoding="utf-8") as f:
     json.dump(metrics, f, indent=4, ensure_ascii=False)
 
+<<<<<<< HEAD
 print(f"Метрики сохранены в {METRICS_PATH}")
+=======
+print(f"Метрики сохранены в {METRICS_PATH}")
+>>>>>>> 6d39fc206fcfa0263d43f21cd727c110ecd1d30b
