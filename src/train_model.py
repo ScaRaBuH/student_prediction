@@ -18,7 +18,6 @@ METRICS_PATH = "metrics/metrics.json"
 os.makedirs("models", exist_ok=True)
 os.makedirs("metrics", exist_ok=True)
 
-print("Загружаем датасет...")
 df = pd.read_csv(DATASET_PATH)
 
 print(f"Размер датасета: {df.shape}")
@@ -43,7 +42,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 print(f"Обучаем модели на {X_train.shape[0]} примерах...")
 
-# RandomForest с балансировкой (он умеет работать с NaN, но мы всё равно импутируем для единообразия)
+# RandomForest с балансировкой
 rf_pipeline = Pipeline([
     ("imputer", SimpleImputer(strategy="median")),  # заполняем медианой
     ("model", RandomForestClassifier(
@@ -110,4 +109,3 @@ with open(METRICS_PATH, "w", encoding="utf-8") as f:
     json.dump(metrics, f, indent=4, ensure_ascii=False)
 
 print(f"Метрики сохранены в {METRICS_PATH}")
-print("Эксперимент завершён!")
