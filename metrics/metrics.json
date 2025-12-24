@@ -1,0 +1,37 @@
+{
+    "accuracy": 0.5877192982456141,
+    "model": "RandomForest (balanced, n=300)",
+    "classification_report": {
+        "graduated": {
+            "precision": 0.5531914893617021,
+            "recall": 0.6419753086419753,
+            "f1-score": 0.5942857142857143,
+            "support": 81.0
+        },
+        "expelled": {
+            "precision": 0.6171875,
+            "recall": 0.6528925619834711,
+            "f1-score": 0.6345381526104418,
+            "support": 121.0
+        },
+        "academic_leave": {
+            "precision": 0.5,
+            "recall": 0.11538461538461539,
+            "f1-score": 0.1875,
+            "support": 26.0
+        },
+        "accuracy": 0.5877192982456141,
+        "macro avg": {
+            "precision": 0.5567929964539008,
+            "recall": 0.47008416200335396,
+            "f1-score": 0.472107955632052,
+            "support": 228.0
+        },
+        "weighted avg": {
+            "precision": 0.581088588325868,
+            "recall": 0.5877192982456141,
+            "f1-score": 0.5692599093114312,
+            "support": 228.0
+        }
+    }
+}
