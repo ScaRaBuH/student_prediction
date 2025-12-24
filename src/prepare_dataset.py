@@ -7,15 +7,13 @@ RESULTS_PATH = "data/raw/результаты.xlsx"
 STATUS_PATH = "data/raw/изменение_статуса.xlsx"
 OUTPUT_PATH = "data/processed/dataset.csv"
 
-print("Загружаем данные...")
-
 df_results = pd.read_excel(RESULTS_PATH)
 df_status = pd.read_excel(STATUS_PATH)
 
 print(f"Успеваемость: {df_results.shape}")
 print(f"Статусы: {df_status.shape}")
 
-# Переименуем ИД → PK для удобного merge
+# Переименуем ИД → PK 
 df_status = df_status.rename(columns={"ИД": "PK"})
 
 # Определим финальный статус студента
@@ -26,14 +24,7 @@ final_status = df_status_sorted.groupby("PK").last()[["статус", "выпу�
 print("\nРаспределение финальных статусов (до маппинга):")
 print(final_status["статус"].value_counts())
 
-# Создадим понятную целевую переменную
-# Логика на основе твоих данных:
-# - Если в последней строке "выпуск" == "выпустился" → 'graduated'
-# - Если статус == -1 → 'expelled'
-# - Если статус == 3 → предположим 'academic_leave' (надо проверить, что это значит)
-# - Если статус == 1 и нет "выпустился" → 'still_studying'
-# - Остальное → 'other'
-
+# Создание целевой переменной
 def map_target(row):
     if row["выпуск"] == "выпустился":
         return "graduated"
@@ -51,7 +42,7 @@ final_status["target"] = final_status.apply(map_target, axis=1)
 print("\nРаспределение целевой переменной:")
 print(final_status["target"].value_counts())
 
-# Теперь выделяем первый семестр
+# Выделяем первый семестр
 # Для каждого студента берём минимальный SEMESTER
 student_first_semester = df_results.groupby("PK")["SEMESTER"].min().reset_index()
 student_first_semester = student_first_semester.rename(columns={"SEMESTER": "first_semester"})
@@ -88,5 +79,3 @@ print(dataset["target"].value_counts())
 # Сохраняем
 dataset.to_csv(OUTPUT_PATH, index=False)
 print(f"\nДатасет сохранён в {OUTPUT_PATH}")
-
-print("\nГотово!")
