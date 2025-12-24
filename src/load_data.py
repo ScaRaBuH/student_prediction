@@ -24,7 +24,7 @@ print(f"Размер таблицы: {df_status.shape}")
 print("Первые 5 строк:")
 print(df_status.head())
 
-# Уникальные значения в столбце статуса (это наш target)
+# Уникальные значения в столбце статуса
 if "статус" in df_status.columns:
     print("\nУникальные значения в столбце 'статус':")
     print(df_status["статус"].value_counts())
